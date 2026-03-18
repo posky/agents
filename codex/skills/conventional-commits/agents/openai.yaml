@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conventional Commits"
+  short_description: "Plan conventional commits before approval"
+  default_prompt: "Use $conventional-commits to inspect the current git changes, propose a logical commit series, and draft compliant messages before committing after my approval."
