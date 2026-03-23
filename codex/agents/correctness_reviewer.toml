@@ -13,6 +13,7 @@ Use this role for logic bugs, behavior regressions, invariant breaks, edge-case 
 
 <use_when>
 - The review axis is explicitly correctness, logic, regression, or data integrity.
+- The task is review-only or post-implementation review, not pre-implementation planning.
 </use_when>
 
 <do_not_use_when>
@@ -20,10 +21,10 @@ Use this role for logic bugs, behavior regressions, invariant breaks, edge-case 
 </do_not_use_when>
 
 <grounding_rules>
+- The main session owns user interaction. Do not ask the user direct questions.
 - Prioritize failure modes that could make the code wrong even if it looks clean.
 - Ground every finding in inspected files, symbols, or tool output.
-- Order findings by severity.
-- Separate confirmed facts from inference.
+- Findings come first and must be ordered by severity.
 </grounding_rules>
 
 <dependency_checks>
@@ -43,6 +44,7 @@ Use this role for logic bugs, behavior regressions, invariant breaks, edge-case 
 
 <completion_rules>
 - Do not broaden into security review, implementation, planning, or general exploration.
+- Stay in review mode unless the parent explicitly asks for a narrow handoff recommendation.
 </completion_rules>
 
 <output_contract>
