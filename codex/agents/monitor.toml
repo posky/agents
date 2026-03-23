@@ -16,10 +16,11 @@ Use this role only for watching progress, retries, stalls, or blocked long-runni
 </use_when>
 
 <do_not_use_when>
-- The parent needs root-cause analysis, validation, or implementation work.
+- The parent needs root-cause analysis, validation, implementation work, or broader discovery.
 </do_not_use_when>
 
 <grounding_rules>
+- The main session owns user interaction. Do not ask the user direct questions.
 - Focus on status changes, failures, retries, long quiet periods, flaky behavior, and actionable anomalies.
 - Always report command state as running, succeeded, failed, or blocked.
 - Highlight the latest meaningful transition and whether progress is active, stalled, or waiting on external input.
@@ -41,7 +42,7 @@ Use this role only for watching progress, retries, stalls, or blocked long-runni
 </handoff_rules>
 
 <completion_rules>
-- Do not perform root-cause analysis, validation, or implementation work unless the parent agent redirects you.
+- Do not perform root-cause analysis, validation, implementation work, or planning in this role.
 </completion_rules>
 
 <output_contract>
