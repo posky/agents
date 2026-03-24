@@ -51,6 +51,7 @@ Follow this sequence by default:
 - Small tasks: quick fixes, tightly scoped edits, or simple answers. No saved plan document is required by default.
 - Medium tasks: multi-file work, real tradeoffs, or changes that benefit from a handoff artifact. Use a saved plan under `.plans/` by default before implementation and prefer executing from that plan in a fresh session unless there is a clear reason not to.
 - Large tasks: refactors, migrations, or multi-day work. Produce a saved plan under `.plans/` first and treat execution and validation as separate follow-up stages, usually in fresh sessions.
+- Before coding any task size, write a Problem 1-Pager covering `Context`, `Problem`, `Goal`, `Non-Goals`, and `Constraints`. For small tasks, this may be brief, but it is still required.
 
 ### Plan Artifacts
 
@@ -71,6 +72,7 @@ Recommended sections:
 
 - title
 - summary
+- problem 1-pager (`Context`, `Problem`, `Goal`, `Non-Goals`, `Constraints`)
 - implementation changes
 - public API or interface impact
 - test plan
@@ -107,11 +109,34 @@ Recommended sections:
 
 ### Single-Writer Rule
 
-- `worker` is the only role that should modify repo-tracked implementation files.
+- Prefer a single writer for repo-tracked implementation files at any given time.
+- Use `worker` as the default implementation role when delegation materially improves the outcome.
+- The main session may modify repo-tracked files directly when the task is small or delegation would add more coordination cost than value.
 - Read-only roles must never edit files, draft patches, or blur into implementation.
 - Saved plan artifacts under `.plans/` are orchestration metadata and may be persisted by the main session, but not by read-only subagents.
 - Planning outputs should be artifact-ready so the main session can save them under `.plans/` without inventing missing sections.
 - Validation and review do not count as complete until their checks or findings are explicit.
+
+### Engineering Defaults
+
+- Before changing code, read the relevant files end to end, including definitions, references, call sites, and related tests when they affect behavior.
+- Compare plausible implementation options briefly when tradeoffs matter, then choose the simplest approach that satisfies the requirement.
+- When important assumptions affect design or future maintenance, record them in an ADR.
+- Before changing a widely used symbol or interface, run a global search to understand impact and leave a brief impact note.
+- Keep changes small and reviewable. Prefer splitting work or refactoring when files, functions, parameter counts, or control flow start getting hard to reason about.
+- Prefer explicit code and intention-revealing names over hidden magic or premature abstraction.
+- Isolate side effects such as I/O, network access, and global state at the boundary layer when practical.
+- Validate inputs, normalize or encode outputs as needed, and never expose secrets in code, logs, or tickets.
+- Catch specific failures rather than broad exceptions, and return clear error messages.
+- Add tests for new behavior.
+- Bug fixes should include a regression test.
+- Tests should be deterministic and independent.
+- Prefer fakes or contract tests over live external systems.
+- When fixing a bug, prefer writing or identifying the failing test first when that is practical.
+- For end-to-end coverage, include at least one happy path and one failure path when the change affects those flows.
+- Consider concurrency, locking, retry, duplication, and deadlock risks when the code path can be affected by them.
+- If tests are not added or cannot be run, state that explicitly with the reason.
+- Consider time-related edge cases such as time zones and DST when handling dates or scheduling.
 
 ### Completion Contract
 
