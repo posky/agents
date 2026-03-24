@@ -7,7 +7,7 @@ Use shell-visible repository evidence to orient the root `AGENTS.md`. Discovery 
 - Inspect existing `AGENTS.md` files first.
 - Determine the operating mode before writing: `discover-only`, `update-in-place`, or `recreate`.
 - Map the top-level structure and likely source roots.
-- Find test locations, entrypoints, and real project commands.
+- Find test locations, entrypoints, real project commands, and any stable verification routines.
 - Default to writing only the root `AGENTS.md` when the mode is a writing mode.
 - Consider a child file only when the user explicitly names the directory.
 
@@ -53,6 +53,8 @@ Treat command discovery as evidence-ranked:
 - Tertiary: targeted text search in likely task documentation
 
 Use secondary evidence for corroboration, not as a sole confirmation source, unless you are explicitly preserving still-valid local guidance. Use tertiary evidence only to find candidates that you then confirm against stronger evidence.
+
+When deciding whether to add a root `Verification` section, prefer workflows that are explicit in primary sources such as CI jobs, package scripts, make targets, or task runners. Treat ad hoc README advice as supporting evidence, not enough by itself unless it is clearly preserved local policy.
 
 ### Existing guidance files
 

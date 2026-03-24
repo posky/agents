@@ -53,11 +53,12 @@ Do not infer child `AGENTS.md` targets from discovery alone.
 
 ### 4. Write the root file first
 
-- Include a repo-wide overview, structure, where-to-look map, conventions, anti-patterns, commands, and notes.
+- Include a repo-wide overview, structure, where-to-look map, conventions, anti-patterns, commands, notes, and optional verification guidance when the repository has a stable verification workflow.
 - Keep wording telegraphic and project-specific.
 - Include generated date, branch, and short commit only when they are cheap to obtain and clearly available.
 - Avoid restating generic language or framework knowledge unless this repo deviates from it.
 - Include only commands that are confirmed by primary repository sources or clearly preserved from existing guidance.
+- Treat `Verification` as policy, not as a second command dump: summarize the minimum checks to run after common change types only when those checks are supported by repository evidence.
 
 Use [root-agents-template.md](./references/root-agents-template.md) as the section contract and quality gate.
 
@@ -100,6 +101,13 @@ Collect candidate commands using evidence tiers:
 
 Use broad text search only to discover leads. Include a command in the final `Commands` section only when it is confirmed by a primary source or clearly preserved from existing guidance that still matches the repo.
 
+## Verification Guidance Rule
+
+- Add a `Verification` section only when the repository exposes a stable verification routine through primary sources or clearly preserved existing guidance.
+- Keep it brief and change-type oriented, for example docs-only, app code, shared library, config, schema, or CI changes.
+- Reference real commands already supported by the evidence rule instead of introducing new command variants.
+- Omit the section when the repository has no clear default verification expectations or when the workflow is too team-specific to state confidently.
+
 ## Validation
 
 - If the mode is `update-in-place` or `recreate`, confirm the root `AGENTS.md` was written or updated.
@@ -108,5 +116,6 @@ Use broad text search only to discover leads. Include a command in the final `Co
 - Check that each child file adds local guidance instead of repeating the parent.
 - Check that header metadata appears only when it was cheap to obtain and confident.
 - Check that listed commands were confirmed by the commands evidence rule.
+- Check that any `Verification` section is optional, evidence-based, and does not duplicate the `Commands` section.
 - Sanity-check config-heavy or docs-heavy directories manually when the repository contains many data files, fixtures, or generated metadata.
 - When evidence is ambiguous, choose fewer child files and explain the omission in your working notes rather than inventing certainty.
