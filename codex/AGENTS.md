@@ -125,7 +125,7 @@ If a plan file is used:
 1. Start the file with a YAML frontmatter block containing exactly `task`, `status`, and `updated_at`.
 2. Keep `task` short and descriptive.
 3. Use exactly one of these `status` values: `in_progress`, `blocked`, or `done`.
-4. Use the `updated_at` format `YYYY-MM-DD HH:MM UTC`.
+4. Use the `updated_at` format `YYYY-MM-DD`.
 5. Update `updated_at` whenever the plan changes in a meaningful way.
 6. Use the body of the file for substantive content; do not move `Context`, `Problem`, `Goal`, `Non-Goals`, or `Constraints` into frontmatter.
 7. Include these required sections:
