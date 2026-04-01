@@ -122,17 +122,26 @@ Do not create a plan file for trivial or easily reversible work.
 
 If a plan file is used:
 
-1. Include these required sections:
+1. Start the file with a YAML frontmatter block containing exactly `task`, `status`, and `updated_at`.
+2. Keep `task` short and descriptive.
+3. Use exactly one of these `status` values: `in_progress`, `blocked`, or `done`.
+4. Use the `updated_at` format `YYYY-MM-DD HH:MM UTC`.
+5. Update `updated_at` whenever the plan changes in a meaningful way.
+6. Use the body of the file for substantive content; do not move `Context`, `Problem`, `Goal`, `Non-Goals`, or `Constraints` into frontmatter.
+7. Include these required sections:
    - `Context`
    - `Problem`
    - `Goal`
    - `Non-Goals`
    - `Constraints`
-2. Add optional sections only as needed, such as `Plan`, `Progress`, `Findings`, `Verification`, `Open Risks`, and `Outcome`.
-3. Keep it concise, factual, and execution-oriented.
-4. Update it when execution meaningfully changes state.
-5. Reconcile it before finalizing.
-6. Treat repository evidence and live verification results as newer than stale plan notes.
+8. Add optional sections only as needed, such as `Plan`, `Progress`, `Findings`, `Verification`, `Open Risks`, and `Outcome`.
+9. Keep it concise, factual, and execution-oriented.
+10. Update it when execution meaningfully changes state.
+11. Reconcile it before finalizing.
+12. Treat repository evidence and live verification results as newer than stale plan notes.
+13. Add a short checkbox TODO checklist when it materially improves tracking of deliverables, verification, or blockers.
+14. Mark items complete only when the item's stated outcome has been met on an explicit and grounded basis, such as implementation completed, evidence retrieved, or verification passed, as appropriate to that item.
+15. Include a brief note or reference when the reason for completion would not otherwise be obvious from the surrounding context.
 
 If a relevant plan file exists, the main session should read it before delegating and pass that artifact to subagents whose work depends on it.
 Subagents should read the relevant plan artifact before starting work when the parent provides it.
