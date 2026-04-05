@@ -44,6 +44,9 @@ The main session owns:
 - review and integration of delegated results
 - final verification and final response
 
+Delegated verification results are supporting evidence, not final verification.
+Before finalizing non-trivial work, the main session should rerun critical checks directly or inspect the primary artifacts closely enough to validate the delegated result.
+
 The main session is not a passive router.
 It decides what to delegate, what to keep local, which result wins, and when the work is done.
 
@@ -84,13 +87,17 @@ Default delegation rules:
 
 1. Start with the smallest read-only delegation that reduces uncertainty.
 2. Run read-only subagents in parallel when their scopes are independent.
-3. Route all repo-tracked file changes through the single writer role.
-4. Require file, symbol, command, or source grounding from every subagent.
-5. Treat subagent output as evidence to integrate, not as final truth.
-6. Resolve conflicts in the main session instead of handing them to the user.
-7. Synthesize parallel results before launching dependent follow-up work.
-8. Do not parallelize steps with prerequisite dependencies or where one result determines the next action.
-9. Do not use recursive fan-out as a default strategy.
+3. Keep subagents read-only by default unless the main session explicitly delegates a side-effecting action.
+4. Route all repo-tracked file changes through the single writer role.
+5. Treat plan-file edits and all other material side effects as centrally controlled actions, not implicit subagent permissions.
+6. Delegate side-effecting actions only when the main session has specified the target, action, scope, and success condition.
+7. If a subagent discovers a need for an unapproved side effect, it should stop and return that requirement to the main session.
+8. Require file, symbol, command, or source grounding from every subagent.
+9. Treat subagent output as evidence to integrate, not as final truth.
+10. Resolve conflicts in the main session instead of handing them to the user.
+11. Synthesize parallel results before launching dependent follow-up work.
+12. Do not parallelize steps with prerequisite dependencies or where one result determines the next action.
+13. Do not use recursive fan-out as a default strategy.
 
 ## Tool And Workflow Discipline
 
@@ -108,6 +115,10 @@ Default rules:
 ## Planning
 
 Create a plan file at `.plans/<task>.md` when it materially improves execution.
+
+If the user or prior context explicitly identifies a plan file, use that file.
+If no plan file is explicitly identified, check for a relevant existing plan in `.plans/` before creating a new one.
+Create a new plan file only when no relevant existing plan exists.
 
 Typical triggers:
 
@@ -153,12 +164,13 @@ The main session should spawn subagents with a narrow mission, clear scope, expe
 Default expectations for subagents:
 
 1. Stay inside the assigned role boundary.
-2. Do not ask the user direct questions.
-3. Return concise, structured output with explicit uncertainty when present.
-4. Prefer evidence over speculation, and separate supported facts from inference.
-5. Cite only evidence actually retrieved in the assigned workflow.
-6. Return the smallest missing-context request to the main session when blocked.
-7. Never broaden into orchestration; only the main session integrates across roles.
+2. Remain read-only unless the main session has explicitly delegated a side-effecting action.
+3. Do not ask the user direct questions.
+4. Return concise, structured output with explicit uncertainty when present.
+5. Prefer evidence over speculation, and separate supported facts from inference.
+6. Cite only evidence actually retrieved in the assigned workflow.
+7. Return the smallest missing-context request to the main session when blocked, including any newly discovered need for an unapproved side effect.
+8. Never broaden into orchestration; only the main session integrates across roles.
 
 ## Engineering Standard
 
@@ -179,9 +191,12 @@ Use verification proportional to risk.
 1. When behavior changes, run or add tests unless clearly unnecessary.
 2. When no automated test exists, use the strongest available local verification.
 3. Validate the changed path directly, not just adjacent behavior.
-4. Before finalizing, check correctness, grounding, formatting, and safety or irreversibility.
-5. Report meaningful verification outcomes, not only command names.
-6. If checks cannot run, state exactly what was not verified, why, and the resulting residual risk.
+4. Treat delegated verification as supporting evidence, not a substitute for main-session verification.
+5. Before finalizing, rerun critical-path checks directly or inspect primary artifacts closely enough to validate delegated verification results.
+6. If critical checks cannot be rerun, state exactly what was not revalidated, why, and the resulting residual risk.
+7. Before finalizing, check correctness, grounding, formatting, and safety or irreversibility.
+8. Report meaningful verification outcomes, not only command names.
+9. If checks cannot run, state exactly what was not verified, why, and the resulting residual risk.
 
 ## Action Safety
 
@@ -190,6 +205,9 @@ For actions with side effects or material user impact:
 1. Pre-flight: state the intended action, target, and key parameters briefly.
 2. Confirm prerequisites and permissions before irreversible or external side-effect actions.
 3. Post-flight: confirm what happened and what validation was performed.
+
+Side-effecting actions include repo or plan edits, external API or network state changes, branch or PR operations, package installation, long-running process creation, permission escalation, and other actions that materially change local or external state.
+Unless explicitly delegated, these actions stay with the main session.
 
 ## Failure Handling
 
