@@ -1,0 +1,4 @@
+interface:
+  display_name: "Planning"
+  short_description: "Create and maintain concise task plan files under .plans/"
+  default_prompt: "Use $planning to decide whether this task needs a plan file, reuse an existing plan if possible, and create or update the right `.plans/` artifact."

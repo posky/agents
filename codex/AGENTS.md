@@ -114,13 +114,10 @@ Default rules:
 
 ## Planning
 
-Create a plan file at `.plans/<task>.md` when it materially improves execution.
+`AGENTS.md` is the authority for when a plan is required.
+If the `planning` skill is unavailable, use a minimal `.plans/` artifact with `task`, `status`, and `updated_at` frontmatter plus `Context`, `Problem`, `Goal`, `Non-Goals`, and `Constraints` sections. Add `Plan` for multi-step or resumable work, and add `Verification` whenever checks, blocker state, or residual risk need to be recorded.
 
-If the user or prior context explicitly identifies a plan file, use that file.
-If no plan file is explicitly identified, check for a relevant existing plan in `.plans/` before creating a new one.
-Create a new plan file only when no relevant existing plan exists.
-
-Typical triggers:
+Create or maintain a plan file under `.plans/` when planning materially improves execution, including:
 
 - multi-step work
 - long-running work
@@ -129,33 +126,21 @@ Typical triggers:
 - tasks with meaningful verification, rollout, or blocker tracking
 - tasks that will generate noisy intermediate findings
 
-Do not create a plan file for trivial or easily reversible work.
+Do not create a plan file for trivial or easily reversible work unless the user explicitly asks for one.
 
-If a plan file is used:
+When choosing a plan file, apply this precedence:
 
-1. Start the file with a YAML frontmatter block containing exactly `task`, `status`, and `updated_at`.
-2. Keep `task` short and descriptive.
-3. Use exactly one of these `status` values: `in_progress`, `blocked`, or `done`.
-4. Use the `updated_at` format `YYYY-MM-DD`.
-5. Update `updated_at` whenever the plan changes in a meaningful way.
-6. Use the body of the file for substantive content; do not move `Context`, `Problem`, `Goal`, `Non-Goals`, or `Constraints` into frontmatter.
-7. Include these required sections:
-   - `Context`
-   - `Problem`
-   - `Goal`
-   - `Non-Goals`
-   - `Constraints`
-8. Add optional sections only as needed, such as `Plan`, `Progress`, `Findings`, `Verification`, `Open Risks`, and `Outcome`.
-9. Keep it concise, factual, and execution-oriented.
-10. Update it when execution meaningfully changes state.
-11. Reconcile it before finalizing.
-12. Treat repository evidence and live verification results as newer than stale plan notes.
-13. Add a short checkbox TODO checklist when it materially improves tracking of deliverables, verification, or blockers.
-14. Mark items complete only when the item's stated outcome has been met on an explicit and grounded basis, such as implementation completed, evidence retrieved, or verification passed, as appropriate to that item.
-15. Include a brief note or reference when the reason for completion would not otherwise be obvious from the surrounding context.
+- a file explicitly named by the user
+- a file explicitly carried forward in the current task lineage
+- the most relevant existing file in `.plans/`
+- create a new file
 
-If a relevant plan file exists, the main session should read it before delegating and pass that artifact to subagents whose work depends on it.
-Subagents should read the relevant plan artifact before starting work when the parent provides it.
+`Prior context` means the current task lineage, not any historical mention in unrelated work.
+`Relevant` means closest current scope with the newest meaningful evidence that does not rely on stale assumptions likely to confuse execution. If the work needs independent verification or blocker tracking, treat the older file as not relevant and create a separate plan.
+
+Plan-file edits are main-session-controlled side effects.
+If a plan file is used, the main session should read it before delegating and pass that artifact as required input to dependent subagents.
+Follow the `planning` skill for the operational workflow, templates, update discipline, and validation steps.
 
 ## Subagent Contracts
 
