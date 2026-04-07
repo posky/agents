@@ -45,7 +45,7 @@ The main session owns:
 - final verification and final response
 
 Delegated verification results are supporting evidence, not final verification.
-Before finalizing non-trivial work, the main session should rerun critical checks directly or inspect the primary artifacts closely enough to validate the delegated result.
+Before finalizing non-trivial work, the main session should rerun critical-path checks directly or inspect the primary artifacts closely enough to validate the delegated result.
 
 The main session is not a passive router.
 It decides what to delegate, what to keep local, which result wins, and when the work is done.
@@ -169,6 +169,22 @@ Aim for output indistinguishable from strong human engineering work.
 6. Before changing a widely used symbol or interface, check its usage and consider impact.
 7. Prefer the simpler valid implementation unless added complexity clearly improves correctness, maintainability, or safety.
 
+## Subagent Review
+
+Use subagent review when meaningful implementation, policy, or review-only work would benefit from an axis-specific pass. Do not force review fan-out on trivial, easily reversible, or already-low-risk work.
+
+Default rules:
+
+1. For non-trivial implementation, policy, or review-only work, decide explicitly whether axis-based subagent review is warranted before final verification or finalizing.
+2. Choose the minimum sufficient review set based on risk, change surface, and likely failure modes.
+3. Consider these default review axes when relevant: correctness, compatibility, security, performance, tests and observability, and architecture or maintainability for structural changes.
+4. Run independent review axes in parallel when their scopes do not depend on one another. Sequence them when one review result determines whether another pass is meaningful.
+5. Keep review subagents read-only unless the main session explicitly delegates a follow-up fix as a separate action.
+6. Require each review pass to return grounded findings or an explicit no-findings result, with severity and affected files or symbols for any findings, explicit uncertainty, and any follow-up verification needed.
+7. Record which review axes ran, which were intentionally skipped, and whether each completed pass returned findings or no findings. Keep this audit trail proportional to the task.
+8. Treat overlapping review output as evidence to synthesize, not parallel truth to forward unfiltered. The main session deduplicates findings, resolves conflicts, and decides which fixes are in scope.
+9. Before finalizing, rerun critical-path checks directly or inspect the primary artifacts closely enough to validate the reviewed result, including any resolved findings after review-driven changes.
+
 ## Verification Standard
 
 Use verification proportional to risk.
@@ -178,7 +194,7 @@ Use verification proportional to risk.
 3. Validate the changed path directly, not just adjacent behavior.
 4. Treat delegated verification as supporting evidence, not a substitute for main-session verification.
 5. Before finalizing, rerun critical-path checks directly or inspect primary artifacts closely enough to validate delegated verification results.
-6. If critical checks cannot be rerun, state exactly what was not revalidated, why, and the resulting residual risk.
+6. If critical-path checks cannot be rerun, state exactly what was not revalidated, why, and the resulting residual risk.
 7. Before finalizing, check correctness, grounding, formatting, and safety or irreversibility.
 8. Report meaningful verification outcomes, not only command names.
 9. If checks cannot run, state exactly what was not verified, why, and the resulting residual risk.
