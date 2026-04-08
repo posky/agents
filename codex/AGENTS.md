@@ -175,17 +175,19 @@ For meaningful implementation, policy, or review-only work, run at least one bou
 
 Default rules:
 
-1. For non-trivial implementation, policy, or review-only work, run at least one axis-specific review pass before final verification or finalizing unless a narrow exception below applies.
-2. The default exception path is limited to trivial work, highly localized and easily reversible low-risk changes, or cases where an independent review pass would be genuinely redundant with already independent review evidence. Routine main-session verification, tests, or CI do not by themselves satisfy this exception.
-3. If review is skipped, record that it was skipped and state the concrete reason. Do not silently substitute main-session inspection for independent review.
-4. Choose the minimum sufficient review set based on risk, change surface, and likely failure modes. One focused axis is enough when that is the true minimum sufficient review.
-5. Consider these default review axes when relevant: correctness, compatibility, security, performance, tests and observability, and architecture or maintainability for structural changes.
-6. Run independent review axes in parallel when their scopes do not depend on one another. Sequence them when one review result determines whether another pass is meaningful.
-7. Keep review subagents read-only unless the main session explicitly delegates a follow-up fix as a separate action.
-8. Require each review pass to return grounded findings or an explicit no-findings result, with severity and affected files or symbols for any findings, explicit uncertainty, and any follow-up verification needed.
-9. Record which review axes ran, which were intentionally skipped, and whether each completed pass returned findings or no findings. Keep this audit trail proportional to the task.
-10. Treat overlapping review output as evidence to synthesize, not parallel truth to forward unfiltered. The main session deduplicates findings, resolves conflicts, and decides which fixes are in scope.
-11. Before finalizing, rerun critical-path checks directly or inspect the primary artifacts closely enough to validate the reviewed result, including any resolved findings after review-driven changes.
+1. For non-trivial implementation, policy, or review-only work, treat independent subagent review as a pre-finalization gate. Do not finalize until at least one axis-specific review pass has completed with findings or an explicit no-findings result unless a narrow exception below applies.
+2. The default exception path is limited to trivial work, highly localized and easily reversible low-risk changes, cases where an independent review pass would be genuinely redundant with already independent review evidence that is current and sufficient for the final changed state on the same risk axis, or cases where review genuinely could not run under the active environment despite a grounded attempt to do so. Routine main-session verification, tests, or CI do not by themselves satisfy this exception.
+3. If review is skipped, record that it was skipped, name the exact exception relied on, and state the concrete reason the work qualifies. Do not silently substitute main-session inspection for independent review.
+4. Claims that review could not run, including tool unavailability or permission limits, require grounded evidence such as an actual failed tool call or an explicit capability restriction present in the active environment. Do not claim review was impossible based on assumption. When this exception is used, record the evidence, what review was attempted, and the resulting residual risk.
+5. Choose the minimum sufficient review set based on risk, change surface, and likely failure modes. One focused axis is enough when that is the true minimum sufficient review.
+6. Consider these default review axes when relevant: correctness, compatibility, security, performance, tests and observability, and architecture or maintainability for structural changes.
+7. Run independent review axes in parallel when their scopes do not depend on one another. Sequence them when one review result determines whether another pass is meaningful.
+8. Keep review subagents read-only unless the main session explicitly delegates a follow-up fix as a separate action.
+9. Require each review pass to return grounded findings or an explicit no-findings result, with severity and affected files or symbols for any findings, explicit uncertainty, and any follow-up verification needed.
+10. Record review coverage in the final response for meaningful work: which axes ran, whether each completed pass returned findings or no findings, which axes were skipped, which axes were inconclusive because they timed out or did not complete, and any case where review could not run with the supporting evidence.
+11. A timed-out or incomplete axis does not count as a completed review pass. The main session may still finalize when at least one sufficient review axis completed and any incomplete axes are explicitly recorded as inconclusive with resulting residual risk.
+12. Treat overlapping review output as evidence to synthesize, not parallel truth to forward unfiltered. The main session deduplicates findings, resolves conflicts, and decides which fixes are in scope.
+13. Before finalizing, rerun critical-path checks directly or inspect the primary artifacts closely enough to validate the reviewed result, including any resolved findings after review-driven changes.
 
 ## Verification Standard
 
