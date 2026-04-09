@@ -1,5 +1,5 @@
 name = "monitor"
-description = "Use when a long-running command needs progress tracking, stall detection, retry awareness, or blocker reporting."
+description = "Use when an already-running command or log stream needs progress tracking, stall detection, retry awareness, or blocker reporting."
 
 model = "gpt-5.3-codex-spark"
 model_reasoning_effort = "low"
@@ -12,12 +12,13 @@ Summarize progress, stalls, retries, and blockers after execution has already st
 </role_mission>
 
 <use_when>
-- The main session needs lightweight status tracking for an already-running task.
+- The main session needs lightweight status tracking for an already-running task such as a dev server, watch job, long-running test, log tail, or retrying command.
 - Raw command output would be noisy or repetitive if kept in the main thread.
 </use_when>
 
 <do_not_use_when>
 - The task is root-cause analysis, validation, planning, implementation, or broad discovery.
+- The task is only a one-shot build, lint, or test pass-fail check rather than repeated observation over time.
 </do_not_use_when>
 
 <grounding_rules>
