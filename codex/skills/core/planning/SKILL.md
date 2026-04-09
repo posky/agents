@@ -5,27 +5,22 @@ description: Main-session-only workflow for choosing, creating, updating, or rec
 
 # Planning
 
-The main session uses this skill to decide whether a task needs a plan file, reuse an existing plan when possible, and keep the selected plan aligned with real execution state. Treat the plan as an execution artifact, not a diary. When the main session provides a plan artifact to a dependent subagent, that artifact should be treated as required input. Subagents should not create or edit `.plans/` files unless the main session explicitly delegates that side effect.
+The main session uses this skill to decide whether a task needs a plan file, reuse an existing plan when possible, and keep the selected plan aligned with real execution state. Treat the plan as an execution artifact, not a diary. Follow `AGENTS.md` for planning policy, ownership, and precedence; this skill covers how to apply that policy to a concrete plan artifact.
 
 ## Workflow
 
 1. Read the active planning policy in `AGENTS.md` and follow it as the authority for when a plan is required.
-2. Apply the plan-file precedence from `AGENTS.md` exactly: user-named file, explicitly carried-forward file from the current task lineage, relevant existing `.plans/` file, then create new.
-3. Treat `prior context` as the current task lineage only. Ignore unrelated historical mentions.
-4. When evaluating an existing `.plans/` file, treat `relevant` as closest current scope with the newest meaningful evidence that does not depend on stale assumptions likely to confuse execution.
-5. Create a new plan only when `AGENTS.md` policy says a plan is warranted and no higher-precedence reusable file fits the current task.
-6. Use the standard templates in [templates.md](./references/templates.md) instead of inventing a fresh format.
-7. Keep the plan grounded in the current task: record the actual problem, intended outcome, non-goals, constraints, and verification path.
-8. Update the plan when execution meaningfully changes state, such as after discovery, implementation, verification, or blockers.
-9. Reconcile the plan before finalizing so completed work, residual risks, and verification notes match reality.
+2. Treat `prior context` as the current task lineage only. Ignore unrelated historical mentions.
+3. Create a new plan only when `AGENTS.md` policy says a plan is warranted and no policy-compliant reusable file fits the current task.
+4. Use the standard templates in [templates.md](./references/templates.md) instead of inventing a fresh format.
+5. Keep the plan grounded in the current task: record the actual problem, intended outcome, non-goals, constraints, and verification path.
+6. Update the plan when execution meaningfully changes state, such as after discovery, implementation, verification, or blockers.
+7. Reconcile the plan before finalizing so completed work, residual risks, and verification notes match reality.
 
 ## Reuse Rules
 
-- Prefer updating an existing relevant plan over creating a near-duplicate.
-- Create a new plan when no higher-precedence file fits, the existing file covers a materially different task, stale assumptions would cause confusion, or the new work deserves independent verification tracking. In those cases, treat the older file as not relevant for precedence purposes.
-- If multiple candidate plans exist, choose the one with the closest scope and newest meaningful evidence.
-- If candidates tie on `updated_at`, prefer the closer scope. If scope still ties, prefer the file the main session has most recently revalidated in the current task. If the tie still cannot be resolved cleanly, create a new plan instead of guessing.
-- When reusing an old plan, replace stale claims instead of appending contradictory notes.
+- Apply the precedence and reuse policy from `AGENTS.md` rather than rewording it here.
+- When an existing file covers a materially different task or would confuse execution with stale assumptions, treat it as not reusable for the current task.
 
 ## Naming And Placement
 

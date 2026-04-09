@@ -21,7 +21,7 @@ The global policy document is carrying detailed plan-writing rules that would be
 
 ## Goal
 
-Leave policy-level planning rules in `AGENTS.md` and move the detailed workflow, templates, and examples into `codex/skills/planning/`.
+Leave policy-level planning rules in `AGENTS.md` and move the detailed workflow, templates, and examples into the planning skill.
 
 ## Non-Goals
 
@@ -37,7 +37,7 @@ Leave policy-level planning rules in `AGENTS.md` and move the detailed workflow,
 
 - [x] Define the policy versus skill boundary
 - [ ] Update `AGENTS.md`
-- [ ] Create `codex/skills/planning/`
+- [ ] Create the planning skill structure
 - [ ] Verify the new documents are internally consistent
 
 ## Verification
@@ -56,7 +56,7 @@ updated_at: 2026-04-07
 
 ## Context
 
-`AGENTS.md` is being reduced to policy-only planning guidance, with the detailed workflow moving into `codex/skills/planning/`.
+`AGENTS.md` is being reduced to policy-only planning guidance, with the detailed workflow moving into the planning skill.
 
 ## Problem
 
@@ -101,7 +101,7 @@ updated_at: 2026-04-07
 
 ## Context
 
-The planning skill needs branded assets for `codex/skills/planning/agents/openai.yaml`.
+The planning skill needs branded assets for its agent configuration.
 
 ## Problem
 
