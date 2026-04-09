@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestration Workflows"
+  short_description: "Route subagent roles and execution sequences for multi-step work"
+  default_prompt: "Use $orchestration-workflows to choose whether to stay local or delegate, route work to the right role, and sequence discovery, implementation, review, and validation without expanding `AGENTS.md` into a playbook."
