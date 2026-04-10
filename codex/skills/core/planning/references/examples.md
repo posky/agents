@@ -132,3 +132,78 @@ Add the requested icons once the assets are available.
 
 - Blocked on missing inputs; no asset validation performed.
 ```
+
+## Example: Vertical Slice Plan With Checkpoints
+
+```md
+---
+task: add review thread summary flow
+status: in_progress
+updated_at: 2026-04-10
+---
+
+## Context
+
+The current GitHub helper can fetch review comments, but it does not produce a concise unresolved-thread summary for the main session.
+
+## Problem
+
+Addressing review feedback is slower than it should be because unresolved-thread context must still be reconstructed manually.
+
+## Goal
+
+Add a resumable implementation plan that introduces unresolved-thread summarization in small, verifiable slices.
+
+## Non-Goals
+
+- Reworking unrelated PR triage flows
+- Adding write-back or auto-reply behavior
+
+## Constraints
+
+- Keep the first slice read-only
+- Preserve the existing GitHub helper contract unless a later slice justifies a change
+
+## Plan
+
+### Phase 1: Foundation
+
+- [ ] Task 1: Identify the unresolved-thread data shape
+  Description: Confirm the minimum fields needed to summarize unresolved threads without changing tool behavior yet.
+  Acceptance Criteria:
+  - [ ] Required fields for thread identity, state, and latest comment are listed
+  - [ ] Any contract uncertainty is called out explicitly
+  Verification:
+  - [ ] Read the current helper and one representative PR thread payload
+  Dependencies: None
+  Files Likely Touched:
+  - `plugins/github/...`
+  Estimated Scope: S
+
+### Checkpoint
+
+- [ ] The required thread-summary contract is explicit before implementation starts
+
+### Phase 2: First Vertical Slice
+
+- [ ] Task 2: Return one unresolved-thread summary path end to end
+  Description: Add one working summary path that maps raw thread data into a compact unresolved-thread result.
+  Acceptance Criteria:
+  - [ ] One unresolved thread can be summarized without manual reconstruction
+  - [ ] Existing consumers remain valid or are updated in the same slice
+  Verification:
+  - [ ] Targeted local validation covers one representative unresolved thread
+  Dependencies: Task 1
+  Files Likely Touched:
+  - `plugins/github/...`
+  - `tests/...`
+  Estimated Scope: M
+
+## Human Checkpoints
+
+- Optional: Pause before Phase 3 if the shared contract still feels ambiguous or if downstream consumers need human sign-off on the summary shape.
+
+## Verification
+
+- Pending
+```

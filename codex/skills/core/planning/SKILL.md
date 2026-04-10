@@ -10,12 +10,14 @@ The main session uses this skill to decide whether a task needs a plan file, reu
 ## Workflow
 
 1. Read the active planning policy in `AGENTS.md` and follow it as the authority for when a plan is required.
-2. Treat `prior context` as the current task lineage only. Ignore unrelated historical mentions.
-3. Create a new plan only when `AGENTS.md` policy says a plan is warranted and no policy-compliant reusable file fits the current task.
-4. Use the standard templates in [templates.md](./references/templates.md) instead of inventing a fresh format.
-5. Keep the plan grounded in the current task: record the actual problem, intended outcome, non-goals, constraints, and verification path.
-6. Update the plan when execution meaningfully changes state, such as after discovery, implementation, verification, or blockers.
-7. Reconcile the plan before finalizing so completed work, residual risks, and verification notes match reality.
+2. Stay in planning mode while shaping the artifact: gather evidence, map dependencies, and structure the work before mixing implementation details into the plan.
+3. Treat `prior context` as the current task lineage only. Ignore unrelated historical mentions.
+4. Create a new plan only when `AGENTS.md` policy says a plan is warranted and no policy-compliant reusable file fits the current task.
+5. Use the standard templates in [templates.md](./references/templates.md) instead of inventing a fresh format.
+6. Keep the plan grounded in the current task: record the actual problem, intended outcome, non-goals, constraints, and verification path.
+7. Use [patterns.md](./references/patterns.md) when the work needs explicit decomposition guidance such as dependency ordering, vertical slices, checkpoints, or optional human checkpoints.
+8. Update the plan when execution meaningfully changes state, such as after discovery, implementation, verification, or blockers.
+9. Reconcile the plan before finalizing so completed work, residual risks, and verification notes match reality.
 
 ## Reuse Rules
 
