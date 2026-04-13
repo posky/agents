@@ -1,6 +1,7 @@
 ---
 description: Save the latest matching plan into .plans
 agent: save_plan
+subtask: false
 ---
 Save the latest matching plan artifact from the current conversation.
 
