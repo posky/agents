@@ -1,6 +1,7 @@
 ---
 description: Fallback general post-change risk review when no narrower review axis is required
 mode: subagent
+hidden: true
 variant: medium
 temperature: 0.1
 permission:

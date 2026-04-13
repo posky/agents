@@ -1,6 +1,7 @@
 ---
 description: Focused review for structural cohesion, module boundaries, coupling, and maintainability risk
 mode: subagent
+hidden: true
 model: openai/gpt-5.4
 variant: high
 temperature: 0.1

@@ -1,6 +1,7 @@
 ---
 description: Focused review for latency, throughput, allocation, query shape, or hot-path regression risk
 mode: subagent
+hidden: true
 model: openai/gpt-5.4
 variant: medium
 temperature: 0.1

@@ -1,6 +1,7 @@
 ---
 description: Focused review for backward compatibility, migration risk, and public contract drift
 mode: subagent
+hidden: true
 model: openai/gpt-5.4
 variant: medium
 temperature: 0.1

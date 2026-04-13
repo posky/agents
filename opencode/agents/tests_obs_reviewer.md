@@ -1,6 +1,7 @@
 ---
 description: Focused review for test gaps, flaky coverage, observability gaps, or rollout risk
 mode: subagent
+hidden: true
 variant: medium
 temperature: 0.1
 permission:

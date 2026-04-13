@@ -1,6 +1,7 @@
 ---
 description: Targeted post-change verification and regression confirmation without source edits
 mode: subagent
+hidden: true
 model: openai/gpt-5.3-codex
 variant: medium
 temperature: 0.1

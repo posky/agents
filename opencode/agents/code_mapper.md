@@ -1,6 +1,7 @@
 ---
 description: Deep tracing of execution flow, state transitions, and data paths from a known anchor
 mode: subagent
+hidden: true
 model: openai/gpt-5.3-codex
 variant: high
 temperature: 0.1

@@ -1,6 +1,7 @@
 ---
 description: Breadth-first discovery of relevant files, affected paths, and validation routes
 mode: subagent
+hidden: true
 variant: low
 temperature: 0.1
 permission:

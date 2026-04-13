@@ -1,6 +1,7 @@
 ---
 description: Bounded implementation role for repo-tracked file changes
 mode: subagent
+hidden: true
 model: openai/gpt-5.3-codex
 variant: high
 temperature: 0.1

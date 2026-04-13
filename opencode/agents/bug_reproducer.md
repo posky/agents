@@ -1,6 +1,7 @@
 ---
 description: Reproduce failures and capture exact pre-fix evidence before implementation
 mode: subagent
+hidden: true
 model: openai/gpt-5.3-codex
 variant: medium
 temperature: 0.1

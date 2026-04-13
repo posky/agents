@@ -1,6 +1,7 @@
 ---
 description: Focused review for logic errors, regressions, and data integrity risk
 mode: subagent
+hidden: true
 model: openai/gpt-5.4
 variant: high
 temperature: 0.1

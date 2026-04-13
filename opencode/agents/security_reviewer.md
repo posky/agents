@@ -1,6 +1,7 @@
 ---
 description: Focused review for trust boundaries, auth, secrets, and unsafe input handling
 mode: subagent
+hidden: true
 model: openai/gpt-5.4
 variant: high
 temperature: 0.1
