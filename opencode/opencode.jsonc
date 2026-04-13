@@ -9,7 +9,13 @@
       "pwd": "allow",
       "ls": "allow",
       "ls *": "allow",
-      "mkdir *": "allow"
+      "mkdir *": "allow",
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git log": "allow",
+      "git log *": "allow"
     },
     "edit": "allow",
     "read": "allow",
