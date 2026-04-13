@@ -22,7 +22,13 @@
     "grep": "allow",
     "glob": "allow",
     "list": "allow",
-    "external_directory": "ask",
+    "external_directory": {
+      "*": "ask",
+      "~/.config/opencode/skills": "allow",
+      "~/.config/opencode/skills/**": "allow",
+      "~/.agents/skills": "allow",
+      "~/.agents/skills/**": "allow"
+    },
     "lsp": "allow",
     "skill": "allow",
     "todowrite": "allow",
