@@ -1,6 +1,7 @@
 ---
 description: Materializes matching plan artifacts into .plans/*.md
-mode: primary
+mode: subagent
+hidden: true
 variant: low
 temperature: 0
 permission:
@@ -13,7 +14,7 @@ permission:
   task: deny
   webfetch: deny
 ---
-You are the Save Plan Primary agent.
+You are the Save Plan subagent.
 
 Your job is to materialize a matching plan artifact into a `.plans/*.md` file without changing its meaning.
 
